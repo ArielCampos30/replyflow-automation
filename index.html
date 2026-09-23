@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ReplyFlow: demo de portfolio para automatización de atención comercial, conversaciones y captura de leads.">
+  <meta name="theme-color" content="#0b1220">
+  <title>ReplyFlow | Automatización comercial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Saltar al contenido</a>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">RF</div>
+        <div><strong>ReplyFlow</strong><span>Atención comercial</span></div>
+      </div>
+
+      <nav class="nav-list" aria-label="Navegación principal">
+        <button class="nav-item active" data-view="inbox" type="button"><span>◫</span>Bandeja</button>
+        <button class="nav-item" data-view="contacts" type="button"><span>◎</span>Contactos</button>
+        <button class="nav-item" data-view="automations" type="button"><span>⚡</span>Automatizaciones</button>
+        <button class="nav-item" data-view="dashboard" type="button"><span>▦</span>Resumen</button>
+      </nav>
+
+      <div class="demo-note">
+        <span>Demo de portfolio</span>
+        <strong>Canales simulados</strong>
+        <p>No utiliza cuentas reales ni una API oficial de mensajería. Todos los datos son ficticios.</p>
+      </div>
+
+      <div class="user-card">
+        <div class="avatar">AC</div>
+        <div><strong>Administrador</strong><span>Portfolio demo</span></div>
+      </div>
+    </aside>
+
+    <div class="app-main">
+      <header class="topbar">
+        <button id="menu-btn" class="menu-btn" type="button" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+        <div class="topbar-copy"><span class="eyebrow">ReplyFlow</span><strong id="view-title">Bandeja de atención</strong></div>
+        <div class="topbar-actions"><span class="status-dot"><i></i> Demo activa</span><button class="primary-btn" id="simulate-btn" type="button">+ Simular consulta</button></div>
+      </header>
+
+      <main id="main-content">
+        <section class="view active" data-view-panel="inbox">
+          <div class="inbox-layout">
+            <aside class="conversation-list-panel panel">
+              <div class="panel-head stacked-mobile">
+                <div><span class="section-kicker">Conversaciones</span><h1>Bandeja</h1></div>
+                <span class="counter" id="open-counter">0 abiertas</span>
+              </div>
+              <label class="search-field"><span>⌕</span><input id="conversation-search" type="search" placeholder="Buscar contacto o empresa..."></label>
+              <div class="filter-row" id="conversation-filters">
+                <button class="chip active" data-filter="all" type="button">Todas</button>
+                <button class="chip" data-filter="unread" type="button">Sin leer</button>
+                <button class="chip" data-filter="human" type="button">Humano</button>
+              </div>
+              <div class="conversation-list" id="conversation-list"></div>
+            </aside>
+
+            <section class="chat-panel panel" id="chat-panel">
+              <div class="chat-head" id="chat-head"></div>
+              <div class="chat-body" id="chat-body"></div>
+              <form class="composer" id="message-form">
+                <input id="message-input" name="message" autocomplete="off" placeholder="Escribí una respuesta..." required>
+                <button class="send-btn" type="submit" aria-label="Enviar">➤</button>
+              </form>
+            </section>
+
+            <aside class="contact-panel panel" id="contact-panel"></aside>
+          </div>
+        </section>
+
+        <section class="view" data-view-panel="contacts">
+          <div class="page-heading">
+            <div><span class="section-kicker">Base comercial</span><h1>Contactos capturados</h1><p>Leads generados desde conversaciones simuladas.</p></div>
+            <button class="secondary-btn" id="export-demo" type="button">Exportar demo</button>
+          </div>
+          <section class="panel table-panel">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Contacto</th><th>Empresa</th><th>Canal</th><th>Estado</th><th>Última interacción</th></tr></thead>
+                <tbody id="contacts-body"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" data-view-panel="automations">
+          <div class="page-heading">
+            <div><span class="section-kicker">Reglas</span><h1>Automatizaciones</h1><p>Respuestas automáticas de demostración basadas en palabras clave.</p></div>
+            <button class="primary-btn" id="new-rule-btn" type="button">+ Nueva regla</button>
+          </div>
+          <div class="automation-grid" id="automation-grid"></div>
+          <section class="panel automation-test">
+            <div><span class="section-kicker">Simulador</span><h2>Probá las reglas</h2><p>Escribí un mensaje como si fuera enviado por un cliente.</p></div>
+            <div class="test-row"><input id="rule-test-input" placeholder="Ej: Quiero saber el precio"><button class="secondary-btn" id="test-rule-btn" type="button">Probar regla</button></div>
+            <div class="test-result" id="test-result">Todavía no ejecutaste ninguna prueba.</div>
+          </section>
+        </section>
+
+        <section class="view" data-view-panel="dashboard">
+          <div class="page-heading"><div><span class="section-kicker">Actividad</span><h1>Resumen de atención</h1><p>Métricas generadas a partir de los datos ficticios de esta demo.</p></div></div>
+          <div class="metrics-grid" id="metrics-grid"></div>
+          <div class="dashboard-grid">
+            <section class="panel chart-card"><span class="section-kicker">Canales</span><h2>Conversaciones por canal</h2><div class="channel-bars" id="channel-bars"></div></section>
+            <section class="panel recent-card"><span class="section-kicker">Actividad reciente</span><h2>Últimas conversaciones</h2><div id="recent-activity"></div></section>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="simulation-modal" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="simulation-title">
+      <div class="modal-head"><div><span class="section-kicker">Entrada simulada</span><h2 id="simulation-title">Nueva consulta</h2></div><button class="icon-btn" data-close="simulation-modal" type="button">×</button></div>
+      <form id="simulation-form" class="modal-form">
+        <label>Nombre<input name="name" required placeholder="Ej: Paula López"></label>
+        <label>Empresa<input name="company" required placeholder="Ej: Estudio Norte"></label>
+        <label>Canal<select name="channel"><option>WhatsApp demo</option><option>Instagram</option><option>Web</option></select></label>
+        <label>Mensaje<input name="message" required placeholder="Ej: Hola, quisiera conocer precios"></label>
+        <div class="modal-actions"><button class="secondary-btn" data-close="simulation-modal" type="button">Cancelar</button><button class="primary-btn" type="submit">Simular ingreso</button></div>
+      </form>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="rule-modal" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="rule-title">
+      <div class="modal-head"><div><span class="section-kicker">Automatización</span><h2 id="rule-title">Nueva regla</h2></div><button class="icon-btn" data-close="rule-modal" type="button">×</button></div>
+      <form id="rule-form" class="modal-form">
+        <label>Nombre de la regla<input name="name" required placeholder="Ej: Consulta de horarios"></label>
+        <label>Palabras clave<input name="keywords" required placeholder="Ej: horario, horarios, atienden"></label>
+        <label>Respuesta automática<textarea name="reply" required rows="4" placeholder="Respuesta que recibirá el cliente en la simulación"></textarea></label>
+        <div class="modal-actions"><button class="secondary-btn" data-close="rule-modal" type="button">Cancelar</button><button class="primary-btn" type="submit">Guardar regla</button></div>
+      </form>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>
